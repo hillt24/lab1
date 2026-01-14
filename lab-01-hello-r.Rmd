@@ -4,8 +4,7 @@ author: "Tiffani Hill"
 date: "01/14/2026"
 output: 
   html_document: 
-    fig_height: 4
-    fig_width: 9
+    highlight: espresso
 ---
 
 ## Load packages and data
@@ -24,8 +23,6 @@ There are 1846 rows and 3 columns. The variables are dataset, x, and y.
 
 ### Exercise 2
 
-The answers for this exercise are already provided to help guide you. Clean up the narrative to reflect what you want to submit. Let’s break it into steps:
-
 First, let's plot the data in the dino dataset:
 
 ```{r plot-dino, fig.height=3, fig.width=6}
@@ -42,17 +39,12 @@ Next, let's calculate the correlation between `x` and `y` in this dataset:
 dino_data %>%
   summarize(r = cor(x, y))
 ```
-There is no linear relationship between x and y. 
+There is no linear relationship between x and y which is reflected graphically and in the correlation coefficient. 
 
 
 ### Exercise 3
 
-This is your turn to write the code and narrative for the star dataset. Follow the same steps as above to complete the analysis. Don't forget to label your chunks appropriately!
-
-Note that the R chunks are labeled with `plot-star` and `cor-star` to provide spaces to place the code for plotting and calculating the correlation coefficient.
-To finish, clean up the narrative by removing these instructions.
-
-```{r plot-star}
+```{r plot-star, fig.height=3, fig.width=4}
 star_data <- datasaurus_dozen %>%
   filter(dataset == "star")
 
@@ -71,21 +63,26 @@ There isn't a linear relationship between x and y. Thus, the correlation coeffic
 
 ### Exercise 4
 
-Add your code and narrative to complete this exercise. Use the conventions from the previous exercises to name your chunks and organize your work.
-
-```{r}
-
+```{r-datasaurus-facet}
+ggplot(datasaurus_dozen, aes(x = x, y = y, color = dataset)) +
+  geom_point() +
+  facet_wrap(~dataset, ncol = 3) +
+  theme(legend.position = "none")
 ```
 
-```{r}
-
+```{r-cor_datasaurus}
+datasaurus_dozen %>%
+  group_by(dataset) %>%
+  summarize(r = cor(x, y)) %>%
+  print(13)
 ```
 
 ### Exercise 5
+```{r plot-bullseye, fig.height=3, fig.width=3}
+circle_data <- datasaurus_dozen %>%
+  filter(dataset == "circle")
 
-This is your final exercise! Add code and narrative as needed. Be creative and show off what you’ve learned so far.
-Add code and narrative as needed.
-
-To add additional R chunks, you can either type the backticks, curly braces, and the letter `r`, or use the "Insert Chunk" button above (the green C+ icon). Have fun!
-
-
+ggplot(data = circle_data, mapping = aes(x = x, y = y)) +
+  geom_point()
+```
+Here, the graphic helps us see the outliers in the circle dataset.
