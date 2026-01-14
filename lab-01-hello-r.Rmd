@@ -53,15 +53,20 @@ Note that the R chunks are labeled with `plot-star` and `cor-star` to provide sp
 To finish, clean up the narrative by removing these instructions.
 
 ```{r plot-star}
+star_data <- datasaurus_dozen %>%
+  filter(dataset == "star")
 
+ggplot(data = star_data, mapping = aes(x = x, y = y)) +
+  geom_point()
 ```
 
-I'm some filler text, you should replace me with more meaningful text...
+Graphically, there seems to be no linear relationship between x and y.
 
 ```{r cor-star}
-
+star_data %>%
+  summarize(r = cor(x, y))
 ```
-Add your explanation here—what did you notice?
+There isn't a linear relationship between x and y. Thus, the correlation coefficient is very small.
 
 
 ### Exercise 4
