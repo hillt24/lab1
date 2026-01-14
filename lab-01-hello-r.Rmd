@@ -42,7 +42,7 @@ Next, let's calculate the correlation between `x` and `y` in this dataset:
 dino_data %>%
   summarize(r = cor(x, y))
 ```
-Once you’ve cleaned up the text, add your own explanation or observations here!
+There is no linear relationship between x and y. 
 
 
 ### Exercise 3
